@@ -85,7 +85,7 @@ if not exist "%SCRIPTDIR%\vswhere.exe" (
 :VSwhereDetection
 REM Use vswhere to list detected installs
 for /f "usebackq tokens=* delims=" %%i in (`"%SCRIPTDIR%\vswhere.exe" -prerelease -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath`) do (
-    for /f "delims=" %%a in ('echo %%i ^| find "2022"') do (
+    for /f "delims=" %%a in ('echo %%i ^| %WINDIR%\System32\find.exe "2022"') do (
         if not "%%a"=="" (
             echo Visual Studio 2022 environment detected...
             call "%~0" "17" "%%i"
@@ -95,7 +95,7 @@ for /f "usebackq tokens=* delims=" %%i in (`"%SCRIPTDIR%\vswhere.exe" -prereleas
             )
         )
     )
-    for /f "delims=" %%a in ('echo %%i ^| find "2019"') do (
+    for /f "delims=" %%a in ('echo %%i ^| %WINDIR%\System32\find.exe "2019"') do (
         if not "%%a"=="" (
             echo Visual Studio 2019 environment detected...
             call "%~0" "16" "%%i"
@@ -105,7 +105,7 @@ for /f "usebackq tokens=* delims=" %%i in (`"%SCRIPTDIR%\vswhere.exe" -prereleas
             )
         )
     )
-    for /f "delims=" %%a in ('echo %%i ^| find "2017"') do (
+    for /f "delims=" %%a in ('echo %%i ^| %WINDIR%\System32\find.exe "2017"') do (
         if not "%%a"=="" (
             echo Visual Studio 2017 environment detected...
             call "%~0" "15" "%%i"
@@ -119,7 +119,7 @@ for /f "usebackq tokens=* delims=" %%i in (`"%SCRIPTDIR%\vswhere.exe" -prereleas
 
 REM Try and use vswhere to detect legacy installs
 for /f "usebackq tokens=* delims=" %%i in (`"%SCRIPTDIR%\vswhere.exe" -legacy -property installationPath`) do (
-    for /f "delims=" %%a in ('echo %%i ^| find "2015"') do (
+    for /f "delims=" %%a in ('echo %%i ^| %WINDIR%\System32\find.exe "2015"') do (
         if not "%%a"=="" (
             echo Visual Studio 2015 environment detected...
             call "%~0" "13" "%%i"
@@ -129,7 +129,7 @@ for /f "usebackq tokens=* delims=" %%i in (`"%SCRIPTDIR%\vswhere.exe" -legacy -p
             )
         )
     )
-    for /f "delims=" %%a in ('echo %%i ^| find "2013"') do (
+    for /f "delims=" %%a in ('echo %%i ^| %WINDIR%\System32\find.exe "2013"') do (
         if not "%%a"=="" (
             echo Visual Studio 2013 environment detected...
             call "%~0" "12" "%%i"
