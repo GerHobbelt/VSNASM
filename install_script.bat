@@ -89,7 +89,7 @@ if not exist "%SCRIPTDIR%\vswhere.exe" (
 :VSwhereDetection
 REM Use vswhere to list detected installs
 for /f "usebackq tokens=* delims=" %%i in (`"%SCRIPTDIR%\vswhere.exe" -prerelease -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath`) do (
-    for /f "delims=" %%a in ('echo %%i ^| find "18"') do (
+    for /f "delims=" %%a in ('echo %%i ^| %WINDIR%\System32\find.exe "18"') do (
         if not "%%a"=="" (
             echo Visual Studio 2026 environment detected...
             call "%~0" "18" "%%i"
